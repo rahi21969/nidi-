@@ -270,6 +270,33 @@
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
     }
+    /* PHOTO GALLERY */
+.photo-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  max-width: 700px;
+  margin: 28px auto 0;
+}
+
+.photo-gallery img {
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid rgba(242, 123, 155, 0.35);
+  box-shadow: 0 8px 25px rgba(242, 123, 155, 0.15);
+}
+
+@media (max-width: 620px) {
+  .photo-gallery {
+    gap: 9px;
+  }
+
+  .photo-gallery img {
+    height: 150px;
+  }
+}
   </style>
 </head>
 <body>
@@ -310,12 +337,33 @@
         </div>
       </div>
     </section>
+    <!-- PAGE 4: PHOTO GALLERY -->
+<section class="story-page" id="page-4" aria-labelledby="title-4" aria-hidden="true">
+  <div class="content">
 
-    <section class="story-page" id="page-4" aria-labelledby="title-4" aria-hidden="true">
+    <div class="eyebrow">our memories</div>
+
+    <h2 id="title-4">
+      Beautiful <em>Memories</em>
+    </h2>
+
+    <p class="description">
+      Every picture holds a special moment.
+    </p>
+
+    <div class="photo-gallery">
+      <img src="images/photo1.jpg" alt="Our memory 1">
+      <img src="images/photo2.jpg" alt="Our memory 2">
+      <img src="images/photo3.jpg" alt="Our memory 3">
+    </div>
+
+  </div>
+</section>
+    <section class="story-page" id="page-5" aria-labelledby="title-5" aria-hidden="true">
       <div class="content">
         <div class="eyebrow">one last thing</div>
         <div class="heart-stage" aria-hidden="true"><div class="heart-glow"></div><div class="heart">♥</div></div>
-        <h2 id="title-4">You are my <em>person.</em></h2>
+        <h2 id="title-5">You are my <em>person.</em></h2>
         <p class="description">In every little moment and every big adventure—I'm so glad it's you, Nidi.</p>
         <div class="signature">I love you, jaan ♥</div>
       </div>
