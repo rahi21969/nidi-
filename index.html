@@ -15,33 +15,28 @@
     button, a { font: inherit; } button { color: inherit; }
     .flower-fall { position: fixed; z-index: 2; inset: 0; overflow: hidden; pointer-events: none; }
     .falling-flower { position: absolute; top: -12vh; left: var(--left); font-size: var(--size); opacity: 0; filter: drop-shadow(0 2px 8px rgba(242,123,155,.35)); animation: flower-drift var(--duration) linear var(--delay) infinite; will-change: transform; }
-    @keyframes flower-drift {
-      0% { transform: translate3d(0, -8vh, 0) rotate(0deg); opacity: 0; }
-      8% { opacity: var(--opacity); }
-      50% { transform: translate3d(var(--sway), 52vh, 0) rotate(180deg); }
-      92% { opacity: var(--opacity); }
-      100% { transform: translate3d(calc(var(--sway) * -0.65), 112vh, 0) rotate(360deg); opacity: 0; }
-    }
-    .topbar { position: fixed; z-index: 5; inset: 0 0 auto; padding: 27px clamp(22px, 6vw, 84px); display: flex; align-items: center; justify-content: space-between; pointer-events: none; }
+    @keyframes flower-drift { 0% { transform: translate3d(0,-8vh,0) rotate(0deg); opacity: 0; } 8% { opacity: var(--opacity); } 50% { transform: translate3d(var(--sway),52vh,0) rotate(180deg); } 92% { opacity: var(--opacity); } 100% { transform: translate3d(calc(var(--sway) * -.65),112vh,0) rotate(360deg); opacity: 0; } }
+    .topbar { position: fixed; z-index: 5; inset: 0 0 auto; padding: 27px clamp(22px,6vw,84px); display: flex; align-items: center; justify-content: space-between; pointer-events: none; }
     .brand { color: var(--ink); font-size: 15px; font-weight: 700; letter-spacing: .16em; text-decoration: none; text-transform: uppercase; pointer-events: auto; }
     .brand span { color: var(--pink); } .top-note { color: #d3c4ca; font-size: 12px; letter-spacing: .08em; }
-    .story-page { position: absolute; z-index: 1; inset: 0; min-height: 100svh; padding: 100px 24px 120px; display: grid; place-items: center; overflow-y: auto; text-align: center; background: radial-gradient(ellipse at 50% 62%, rgba(181,37,83,.2), transparent 42%), radial-gradient(ellipse at 50% 110%, rgba(115,28,57,.2), transparent 55%), var(--night); opacity: 0; visibility: hidden; transform: translateX(5%); transition: opacity .55s ease, transform .55s ease, visibility .55s; pointer-events: none; }
-    .story-page:nth-of-type(even) { background: radial-gradient(ellipse at 50% 0%, rgba(181,37,83,.19), transparent 46%), linear-gradient(160deg,#1a1119,#100b10 72%); }
+    .story-page { position: absolute; z-index: 1; inset: 0; min-height: 100svh; padding: 100px 24px 120px; display: grid; place-items: center; overflow-y: auto; text-align: center; background: radial-gradient(ellipse at 50% 62%,rgba(181,37,83,.2),transparent 42%),radial-gradient(ellipse at 50% 110%,rgba(115,28,57,.2),transparent 55%),var(--night); opacity: 0; visibility: hidden; transform: translateX(5%); transition: opacity .55s ease,transform .55s ease,visibility .55s; pointer-events: none; }
+    .story-page:nth-of-type(even) { background: radial-gradient(ellipse at 50% 0%,rgba(181,37,83,.19),transparent 46%),linear-gradient(160deg,#1a1119,#100b10 72%); }
     .story-page.active { z-index: 1; opacity: 1; visibility: visible; transform: translateX(0); pointer-events: auto; }
     .story-page.leaving-left { transform: translateX(-5%); } .content { width: min(760px,100%); } .active .content { animation: content-in .65s both; }
-    .eyebrow, .section-label { color: #e5a1b4; font-size: 10px; font-weight: 600; letter-spacing: .23em; text-transform: uppercase; }
-    .eyebrow { display: inline-flex; align-items: center; gap: 9px; font-size: 11px; } .eyebrow::before, .eyebrow::after { content: '✦'; color: var(--pink); font-size: 9px; }
-    h1, h2 { font-family: 'Playfair Display', Georgia, serif; font-weight: 500; letter-spacing: -.045em; }
-    h1 { margin: 26px 0 12px; font-size: clamp(58px,10vw,112px); line-height: .96; } h1 em, h2 em { color: var(--pink); font-weight: 500; }
+    .eyebrow,.section-label { color: #e5a1b4; font-size: 10px; font-weight: 600; letter-spacing: .23em; text-transform: uppercase; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 9px; font-size: 11px; } .eyebrow::before,.eyebrow::after { content: '✦'; color: var(--pink); font-size: 9px; }
+    h1,h2 { font-family: 'Playfair Display',Georgia,serif; font-weight: 500; letter-spacing: -.045em; }
+    h1 { margin: 26px 0 12px; font-size: clamp(58px,10vw,112px); line-height: .96; } h1 em,h2 em { color: var(--pink); font-weight: 500; }
     h2 { margin: 18px 0; font-size: clamp(42px,7vw,72px); line-height: 1.08; }
-    .subtitle { margin: 22px 0 0; color: #d5c6cb; font: italic clamp(19px,3vw,27px) 'Playfair Display', Georgia, serif; }
+    .subtitle { margin: 22px 0 0; color: #d5c6cb; font: italic clamp(19px,3vw,27px) 'Playfair Display',Georgia,serif; }
     .description { max-width: 530px; margin: 0 auto; color: #d2c2c9; font-size: 15px; line-height: 1.9; }
     .heart-stage { position: relative; width: 140px; height: 144px; margin: 34px auto 24px; display: grid; place-items: center; }
     .heart-glow { position: absolute; width: 145px; height: 145px; border-radius: 50%; background: rgba(235,75,120,.25); filter: blur(40px); animation: pulse 2.8s ease-in-out infinite; }
-    .heart { position: relative; color: #f48aa5; font-size: 88px; line-height: 1; text-shadow: 0 0 26px rgba(255,91,143,.46), 0 8px 30px rgba(0,0,0,.4); animation: heartbeat 1.8s ease-in-out infinite; }
+    .heart { position: relative; color: #f48aa5; font-size: 88px; line-height: 1; text-shadow: 0 0 26px rgba(255,91,143,.46),0 8px 30px rgba(0,0,0,.4); animation: heartbeat 1.8s ease-in-out infinite; }
     .caption { margin: 0; color: #a99ba2; font-size: 13px; letter-spacing: .045em; }
     .note-card { position: relative; max-width: 760px; padding: clamp(34px,7vw,72px); border: 1px solid rgba(255,255,255,.09); background: radial-gradient(ellipse at 50% 0%,rgba(239,107,147,.18),transparent 53%),var(--panel); box-shadow: 0 28px 90px rgba(0,0,0,.24); }
-    .note-card::before, .note-card::after { position: absolute; color: #e7829e; content: '✦'; opacity: .7; } .note-card::before { top: 24px; left: 26px; } .note-card::after { right: 26px; bottom: 24px; }
+    .note-card::before,.note-card::after { position: absolute; color: #e7829e; content: '✦'; opacity: .7; } .note-card::before { top: 24px; left: 26px; } .note-card::after { right: 26px; bottom: 24px; }
+    .love-note { max-width: 610px; margin: 0 auto; color: #d2c2c9; font-size: 15px; line-height: 1.9; text-align: left; white-space: pre-line; }
     .signature { margin-top: 27px; color: #f29ab0; font: italic 22px 'Playfair Display',Georgia,serif; }
     .photo-gallery { width: min(760px,100%); margin: 30px auto 0; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 14px; }
     .photo-gallery img { display: block; width: 100%; height: clamp(180px,31vh,300px); border: 1px solid rgba(242,123,155,.35); border-radius: 14px; object-fit: cover; box-shadow: 0 8px 25px rgba(0,0,0,.3),0 0 18px rgba(242,123,155,.08); transition: transform .3s ease,box-shadow .3s ease; }
@@ -59,80 +54,24 @@
     @keyframes heartbeat { 0%,45%,100% { transform: scale(1); } 12%,30% { transform: scale(1.11); } 22% { transform: scale(1.02); } }
     @keyframes pulse { 50% { transform: scale(1.25); opacity: .65; } }
     @keyframes content-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
-    @media (max-width: 620px) {
-      .topbar { padding: 21px 20px; } .top-note { font-size: 9px; } .story-page { padding: 85px 20px 105px; }
-      .photo-gallery { grid-template-columns: 1fr; gap: 10px; max-width: 390px; margin-top: 20px; } .photo-gallery img { height: min(23vh,190px); }
-      .reasons { grid-template-columns: 1fr; gap: 9px; margin-top: 22px; } .reason { min-height: 70px; flex-direction: row; }
-      .navigation { bottom: 18px; } .nav-button { width: 44px; height: 44px; }
-    }
-    @media (max-height: 620px) and (min-width: 621px) {
-      .story-page { padding-top: 75px; padding-bottom: 90px; } .photo-gallery { margin-top: 16px; } .photo-gallery img { height: 34vh; }
-      .heart-stage { height: 100px; margin: 15px auto; } .heart { font-size: 70px; } .heart-glow { width: 110px; height: 110px; }
-    }
+    @media (max-width: 620px) { .topbar { padding: 21px 20px; } .top-note { font-size: 9px; } .story-page { padding: 85px 20px 105px; } .photo-gallery { grid-template-columns: 1fr; gap: 10px; max-width: 390px; margin-top: 20px; } .photo-gallery img { height: min(23vh,190px); } .reasons { grid-template-columns: 1fr; gap: 9px; margin-top: 22px; } .reason { min-height: 70px; flex-direction: row; } .navigation { bottom: 18px; } .nav-button { width: 44px; height: 44px; } }
+    @media (max-height: 620px) and (min-width: 621px) { .story-page { padding-top: 75px; padding-bottom: 90px; } .photo-gallery { margin-top: 16px; } .photo-gallery img { height: 34vh; } .heart-stage { height: 100px; margin: 15px auto; } .heart { font-size: 70px; } .heart-glow { width: 110px; height: 110px; } }
   </style>
 </head>
 <body>
   <div class="flower-fall" id="flower-fall" aria-hidden="true"></div>
-  <header class="topbar">
-    <a class="brand" href="#page-1" id="home-link">for <span>nidi</span></a>
-    <div class="top-note">a little something, just for you</div>
-  </header>
+  <header class="topbar"><a class="brand" href="#page-1" id="home-link">for <span>nidi</span></a><div class="top-note">a little something, just for you</div></header>
   <main id="story" aria-live="polite">
-    <section class="story-page active" id="page-1" aria-labelledby="title-1">
-      <div class="content">
-        <div class="eyebrow">made with love</div>
-        <h1 id="title-1">For <em>Nidi</em></h1>
-        <p class="subtitle">My favorite person. My favorite feeling.</p>
-        <div class="heart-stage" aria-hidden="true"><div class="heart-glow"></div><div class="heart">♥</div></div>
-        <p class="caption">A tiny reminder of how much you mean to me.</p>
-      </div>
-    </section>
-    <section class="story-page" id="page-2" aria-labelledby="title-2" aria-hidden="true">
-      <article class="content note-card">
-        <div class="section-label">this one is for you</div>
-        <h2 id="title-2">I love <em>you</em></h2>
-        <p class="description">Nidi, you make ordinary days feel a little brighter and every moment feel a little more special. This page is just a small way to say what I hope you always know: you are so loved, exactly as you are.</p>
-        <div class="signature">Always yours ♥</div>
-      </article>
-    </section>
-    <section class="story-page" id="page-3" aria-labelledby="title-3" aria-hidden="true">
-      <div class="content">
-        <div class="eyebrow">our memories</div>
-        <h2 id="title-3">Beautiful <em>memories</em></h2>
-        <p class="description">Every picture holds a special moment.</p>
-        <div class="photo-gallery">
-          <img src="images/photo1.jpeg" alt="A favorite memory with Nidi" loading="lazy">
-          <img src="images/photo2.jpeg" alt="Another lovely memory with Nidi" loading="lazy">
-          <img src="images/photo3.jpeg" alt="One more special memory with Nidi" loading="lazy">
-        </div>
-        <p class="photo-hint">More memories to come, jaan ♥</p>
-      </div>
-    </section>
-    <section class="story-page" id="page-4" aria-labelledby="title-4" aria-hidden="true">
-      <div class="content">
-        <div class="eyebrow">the little things</div>
-        <h2 id="title-4">You make life <em>sweeter.</em></h2>
-        <p class="description">A few of the many reasons you make my world a better place.</p>
-        <div class="reasons">
-          <article class="reason"><div class="reason-icon" aria-hidden="true">♡</div><p>Your beautiful heart</p></article>
-          <article class="reason"><div class="reason-icon" aria-hidden="true">✧</div><p>The way you make me smile</p></article>
-          <article class="reason"><div class="reason-icon" aria-hidden="true">♥</div><p>Simply being you</p></article>
-        </div>
-        <div class="signature">I love you, jaan ♥</div>
-      </div>
-    </section>
+    <section class="story-page active" id="page-1" aria-labelledby="title-1"><div class="content"><div class="eyebrow">made with love</div><h1 id="title-1">For <em>Nidi</em></h1><p class="subtitle">My favorite person. My favorite feeling.</p><div class="heart-stage" aria-hidden="true"><div class="heart-glow"></div><div class="heart">♥</div></div><p class="caption">A tiny reminder of how much you mean to me.</p></div></section>
+    <section class="story-page" id="page-2" aria-labelledby="title-2"><article class="content note-card"><div class="section-label">this one is for you</div><h2 id="title-2">I love <em>you</em></h2><p class="love-note">ik im not perfect , i don't make you smile always ,but trust me iloveyou more than anything i can't express this feeling which is in my heart but trust the place you hold in my life in my heart no one can reach there except you and also i can't give this place to anyone....
+
+jab jab ap roti ho muje itna bura lagta h i can't explain apko takleef mai dekhna muje acha nhi lagta muje bohat hurt hota h tab mai kyu nhi apke pass hu mai apko sambhal ta lekin trust me wallah mujse call pe jitna hota h mai krta hu wallah aur mai khud ko aur behtar banani ki koshish krta hu har din mai chahta ho apko mere se bas pyaar mile khushi mile wo comfort mile jo kisse k sath nhi milta apko ap comfortable hojav itni mere sath kuch bolne se pehle sochna na padhe aur in sha allah in sha allah allah ko pata h meri niyat saaf h muje sach mai apse shadi krni h in sha allah allah hume humesha sath rakhe aur khush rakhe sath mai apke mou se meri jaan , iloveyou , har ek cheez sunn ne ka itna wait krta hu wallah aur mai wait kruga jab tak apka khud ka dil na kare bolne ka ye....
+
+ye website bas ek chota sa way of express my love to you in sha allah hum ek dusre ko support kare hum acha kamaye hum dono ek dusre k up and downs dekhe in sha allah hum humare up and downs mai sath rahe aur kabhi b ek dusre ka sath nhi chorde bas yehi dua rehti h meri dua mere rab se aur humesha rahegi ki aur sach mai apke leye niyaaz daale h maine tahhajud padhi h maine uss mai roo roo k apko maanga h aur allah ne muje iska ajar diya wallah ap mili muje aur mai apko kissi b point pe chord nhi skta na mai chorduga kyu ki i can't muje sach mai bohat saara pyaar hogaya h ab apse bas yehi kahuga ab last mai ki hum humesha ek dusre k sath rahe aur in sha allah humari shadi ho aur mai sab kuch krne ko tayyar hu uss k leye apke papa ji obv mere papa ji ko mana ne k leye unke pair tak pakduga mai sab ko mana wunga nhi manege tou b manawuga lekin jab tak nhi manege tab tak mana ta rahuga in sha allah in sha allah aur muje bas apka support chaheye aur loyalty aur pyaar apka bas baaki mai sambhal lunga iloveyou the most zuu wandai che bi</p><div class="signature">Always yours ♥</div></article></section>
+    <section class="story-page" id="page-3" aria-labelledby="title-3"><div class="content"><div class="eyebrow">our memories</div><h2 id="title-3">Beautiful <em>memories</em></h2><p class="description">Every picture holds a special moment.</p><div class="photo-gallery"><img src="images/photo1.jpeg" alt="A favorite memory with Nidi" loading="lazy"><img src="images/photo2.jpeg" alt="Another lovely memory with Nidi" loading="lazy"><img src="images/photo3.jpeg" alt="One more special memory with Nidi" loading="lazy"></div><p class="photo-hint">More memories to come, jaan ♥</p></div></section>
+    <section class="story-page" id="page-4" aria-labelledby="title-4"><div class="content"><div class="eyebrow">the little things</div><h2 id="title-4">You make life <em>sweeter.</em></h2><p class="description">A few of the many reasons you make my world a better place.</p><div class="reasons"><article class="reason"><div class="reason-icon" aria-hidden="true">♡</div><p>Your beautiful heart</p></article><article class="reason"><div class="reason-icon" aria-hidden="true">✧</div><p>The way you make me smile</p></article><article class="reason"><div class="reason-icon" aria-hidden="true">♥</div><p>Simply being you</p></article></div><div class="signature">I love you, jaan ♥</div></div></section>
   </main>
-  <nav class="navigation" aria-label="Page navigation">
-    <button class="nav-button" id="previous" type="button" aria-label="Previous page" disabled>‹</button>
-    <div class="page-progress" role="group" aria-label="Choose a page">
-      <button class="page-dot" type="button" aria-label="Go to page 1" aria-current="step"></button>
-      <button class="page-dot" type="button" aria-label="Go to page 2"></button>
-      <button class="page-dot" type="button" aria-label="Go to page 3"></button>
-      <button class="page-dot" type="button" aria-label="Go to page 4"></button>
-    </div>
-    <span class="page-count" id="page-count" aria-live="polite">01 / 04</span>
-    <button class="nav-button" id="next" type="button" aria-label="Next page">›</button>
-  </nav>
+  <nav class="navigation" aria-label="Page navigation"><button class="nav-button" id="previous" type="button" aria-label="Previous page" disabled>‹</button><div class="page-progress" role="group" aria-label="Choose a page"><button class="page-dot" type="button" aria-label="Go to page 1" aria-current="step"></button><button class="page-dot" type="button" aria-label="Go to page 2"></button><button class="page-dot" type="button" aria-label="Go to page 3"></button><button class="page-dot" type="button" aria-label="Go to page 4"></button></div><span class="page-count" id="page-count" aria-live="polite">01 / 04</span><button class="nav-button" id="next" type="button" aria-label="Next page">›</button></nav>
   <script>
     const pages = Array.from(document.querySelectorAll('.story-page'));
     const dots = Array.from(document.querySelectorAll('.page-dot'));
@@ -140,7 +79,6 @@
     const nextButton = document.getElementById('next');
     const pageCount = document.getElementById('page-count');
     let currentPage = 0;
-
     function showPage(index) {
       if (index < 0 || index >= pages.length || index === currentPage) return;
       const oldPage = currentPage;
@@ -152,28 +90,17 @@
         page.setAttribute('aria-hidden', String(!active));
         if (active) page.scrollTop = 0;
       });
-      dots.forEach((dot, dotIndex) => {
-        if (dotIndex === currentPage) dot.setAttribute('aria-current', 'step');
-        else dot.removeAttribute('aria-current');
-      });
+      dots.forEach((dot, dotIndex) => { if (dotIndex === currentPage) dot.setAttribute('aria-current', 'step'); else dot.removeAttribute('aria-current'); });
       previousButton.disabled = currentPage === 0;
       nextButton.disabled = currentPage === pages.length - 1;
       pageCount.textContent = `${String(currentPage + 1).padStart(2, '0')} / ${String(pages.length).padStart(2, '0')}`;
       history.replaceState(null, '', `#page-${currentPage + 1}`);
     }
-
     previousButton.addEventListener('click', () => showPage(currentPage - 1));
     nextButton.addEventListener('click', () => showPage(currentPage + 1));
     dots.forEach((dot, index) => dot.addEventListener('click', () => showPage(index)));
-    document.getElementById('home-link').addEventListener('click', (event) => {
-      event.preventDefault();
-      showPage(0);
-    });
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'ArrowRight' || event.key === 'PageDown') showPage(currentPage + 1);
-      if (event.key === 'ArrowLeft' || event.key === 'PageUp') showPage(currentPage - 1);
-    });
-
+    document.getElementById('home-link').addEventListener('click', (event) => { event.preventDefault(); showPage(0); });
+    document.addEventListener('keydown', (event) => { if (event.key === 'ArrowRight' || event.key === 'PageDown') showPage(currentPage + 1); if (event.key === 'ArrowLeft' || event.key === 'PageUp') showPage(currentPage - 1); });
     const flowerLayer = document.getElementById('flower-fall');
     const flowers = ['🌸', '🌷', '🌼', '✿'];
     for (let i = 0; i < 18; i += 1) {
@@ -188,7 +115,6 @@
       flower.style.setProperty('--opacity', `${0.35 + Math.random() * 0.4}`);
       flowerLayer.appendChild(flower);
     }
-
     const initialPage = Number(location.hash.replace('#page-', '')) - 1;
     if (Number.isInteger(initialPage) && initialPage > 0 && initialPage < pages.length) showPage(initialPage);
   </script>
