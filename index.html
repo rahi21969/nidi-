@@ -14,122 +14,120 @@
       --ink: #fff8f5;
       --muted: #b8aab0;
       --pink: #f27b9b;
-      --rose: #bc365f;
       --night: #100b10;
+      --panel: #21141e;
     }
 
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    html, body { width: 100%; min-width: 320px; height: 100%; margin: 0; }
     body {
-      margin: 0;
-      min-width: 320px;
+      overflow: hidden;
       background: var(--night);
       color: var(--ink);
       font-family: 'DM Sans', sans-serif;
       -webkit-font-smoothing: antialiased;
     }
     button, a { font: inherit; }
-    a { color: inherit; }
-    .page { overflow: hidden; }
+    button { color: inherit; }
 
     .topbar {
-      position: absolute;
-      z-index: 2;
-      top: 0;
-      left: 0;
-      width: 100%;
+      position: fixed;
+      z-index: 5;
+      inset: 0 0 auto;
       padding: 27px clamp(22px, 6vw, 84px);
       display: flex;
       align-items: center;
       justify-content: space-between;
+      pointer-events: none;
     }
     .brand {
+      color: var(--ink);
       font-size: 15px;
       font-weight: 700;
       letter-spacing: .16em;
-      text-transform: uppercase;
       text-decoration: none;
+      text-transform: uppercase;
+      pointer-events: auto;
     }
     .brand span { color: var(--pink); }
-    .top-note {
-      color: #d3c4ca;
-      font-size: 12px;
-      letter-spacing: .08em;
-    }
+    .top-note { color: #d3c4ca; font-size: 12px; letter-spacing: .08em; }
 
-    .hero {
-      position: relative;
-      min-height: 740px;
-      height: min(940px, 100svh);
+    .story-page {
+      position: absolute;
+      inset: 0;
+      min-height: 100svh;
+      padding: 100px 24px 120px;
       display: grid;
       place-items: center;
-      padding: 90px 20px 52px;
+      overflow-y: auto;
       text-align: center;
-      isolation: isolate;
       background:
-        radial-gradient(ellipse at 50% 63%, rgba(181, 37, 83, .25), transparent 36%),
-        radial-gradient(ellipse at 50% 110%, rgba(115, 28, 57, .24), transparent 50%),
-        #100b10;
+        radial-gradient(ellipse at 50% 62%, rgba(181, 37, 83, .2), transparent 42%),
+        radial-gradient(ellipse at 50% 110%, rgba(115, 28, 57, .2), transparent 55%),
+        var(--night);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(5%);
+      transition: opacity .55s ease, transform .55s ease, visibility .55s;
+      pointer-events: none;
     }
-    .hero::before, .hero::after {
-      content: '';
-      position: absolute;
-      z-index: -1;
-      width: 1px;
-      height: 75%;
-      top: 12%;
-      background: linear-gradient(transparent, rgba(255,255,255,.07), transparent);
+    .story-page:nth-of-type(even) {
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(181, 37, 83, .19), transparent 46%),
+        linear-gradient(160deg, #1a1119, #100b10 72%);
     }
-    .hero::before { left: 9%; }
-    .hero::after { right: 9%; }
-    .hero-content { max-width: 760px; animation: rise .9s ease both; }
+    .story-page.active {
+      z-index: 1;
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0);
+      pointer-events: auto;
+    }
+    .story-page.leaving-left { transform: translateX(-5%); }
+    .content { width: min(760px, 100%); animation: content-in .65s both; }
+    .active .content { animation: content-in .65s both; }
 
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
+    .eyebrow, .section-label {
       color: #e5a1b4;
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 600;
       letter-spacing: .23em;
       text-transform: uppercase;
     }
-    .eyebrow::before, .eyebrow::after {
-      content: '✦';
-      font-size: 9px;
-      color: var(--pink);
-    }
-
-    h1 {
-      margin: 26px 0 12px;
+    .eyebrow { display: inline-flex; align-items: center; gap: 9px; font-size: 11px; }
+    .eyebrow::before, .eyebrow::after { content: '✦'; color: var(--pink); font-size: 9px; }
+    h1, h2 {
       font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(58px, 10vw, 112px);
       font-weight: 500;
-      line-height: .96;
-      letter-spacing: -.055em;
+      letter-spacing: -.045em;
     }
-    h1 em { color: var(--pink); font-weight: 500; }
-
-    .hero-subtitle {
+    h1 { margin: 26px 0 12px; font-size: clamp(58px, 10vw, 112px); line-height: .96; }
+    h1 em, h2 em { color: var(--pink); font-weight: 500; }
+    h2 { margin: 18px 0; font-size: clamp(42px, 7vw, 72px); line-height: 1.08; }
+    .subtitle {
       margin: 22px 0 0;
       color: #d5c6cb;
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(19px, 3vw, 27px);
-      font-style: italic;
+      font: italic clamp(19px, 3vw, 27px) 'Playfair Display', Georgia, serif;
     }
-
+    .description {
+      max-width: 530px;
+      margin: 0 auto;
+      color: #d2c2c9;
+      font-size: 15px;
+      line-height: 1.9;
+    }
     .heart-stage {
       position: relative;
       width: 140px;
       height: 144px;
-      margin: 42px auto 34px;
+      margin: 34px auto 24px;
       display: grid;
       place-items: center;
     }
     .heart-glow {
       position: absolute;
-      width: 150px;
-      height: 150px;
+      width: 145px;
+      height: 145px;
       border-radius: 50%;
       background: rgba(235, 75, 120, .25);
       filter: blur(40px);
@@ -143,17 +141,47 @@
       text-shadow: 0 0 26px rgba(255, 91, 143, .46), 0 8px 30px rgba(0,0,0,.4);
       animation: heartbeat 1.8s ease-in-out infinite;
     }
-    .hero-caption {
-      margin: 0;
-      color: #a99ba2;
-      font-size: 13px;
-      letter-spacing: .045em;
+    .caption { margin: 0; color: #a99ba2; font-size: 13px; letter-spacing: .045em; }
+
+    .note-card {
+      position: relative;
+      max-width: 760px;
+      padding: clamp(34px, 7vw, 72px);
+      border: 1px solid rgba(255,255,255,.09);
+      background: radial-gradient(ellipse at 50% 0%, rgba(239,107,147,.18), transparent 53%), var(--panel);
+      box-shadow: 0 28px 90px rgba(0,0,0,.24);
     }
+    .note-card::before, .note-card::after { position: absolute; color: #e7829e; content: '✦'; opacity: .7; }
+    .note-card::before { top: 24px; left: 26px; }
+    .note-card::after { right: 26px; bottom: 24px; }
+    .signature { margin-top: 27px; color: #f29ab0; font: italic 22px 'Playfair Display', Georgia, serif; }
+
+    .reasons {
+      margin-top: 38px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .reason {
+      min-height: 150px;
+      padding: 22px 16px;
+      border: 1px solid rgba(255,255,255,.09);
+      background: rgba(255,255,255,.035);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      transition: transform .25s ease, border-color .25s ease, background .25s ease;
+    }
+    .reason:hover { transform: translateY(-5px); border-color: rgba(242,123,155,.45); background: rgba(242,123,155,.07); }
+    .reason-icon { color: var(--pink); font-size: 25px; }
+    .reason p { margin: 0; color: #e8dce1; font: 17px 'Playfair Display', Georgia, serif; }
 
     .button {
-      min-height: 52px;
-      margin-top: 30px;
-      padding: 0 28px;
+      min-height: 50px;
+      margin-top: 27px;
+      padding: 0 25px;
       border: 1px solid rgba(255,255,255,.16);
       border-radius: 999px;
       display: inline-flex;
@@ -164,185 +192,54 @@
       color: white;
       font-size: 13px;
       font-weight: 700;
-      box-shadow: 0 10px 35px rgba(190, 43, 87, .27);
-      transition: transform .2s ease, box-shadow .2s ease;
+      box-shadow: 0 10px 35px rgba(190,43,87,.27);
       cursor: pointer;
+      transition: transform .2s ease, box-shadow .2s ease;
     }
-    .button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 14px 40px rgba(190, 43, 87, .4);
-    }
-    .button .arrow { font-size: 19px; line-height: 1; }
+    .button:hover { transform: translateY(-2px); box-shadow: 0 14px 40px rgba(190,43,87,.4); }
+    .button-arrow { font-size: 19px; line-height: 1; }
 
-    .scroll-cue {
-      position: absolute;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%);
-      color: #8f8088;
-      font-size: 10px;
-      letter-spacing: .17em;
-      text-transform: uppercase;
-      text-decoration: none;
-    }
-    .scroll-cue::after {
-      content: '';
-      display: block;
-      width: 1px;
-      height: 27px;
-      margin: 10px auto 0;
-      background: linear-gradient(var(--pink), transparent);
-    }
-
-    .message-section {
-      padding: 104px 22px 112px;
-      background: linear-gradient(180deg, #171016, #21101a 52%, #171016);
-    }
-    .message-card {
-      position: relative;
-      max-width: 760px;
-      margin: 0 auto;
-      padding: clamp(34px, 7vw, 72px);
-      border: 1px solid rgba(255,255,255,.09);
-      border-radius: 5px;
-      background:
-        radial-gradient(ellipse at 50% 0%, rgba(239, 107, 147, .18), transparent 53%),
-        linear-gradient(145deg, rgba(255,255,255,.035), transparent 60%),
-        #21141e;
-      text-align: center;
-      box-shadow: 0 28px 90px rgba(0,0,0,.24);
-    }
-    .message-card::before, .message-card::after {
-      content: '✦';
-      position: absolute;
-      color: #e7829e;
-      opacity: .7;
-    }
-    .message-card::before { top: 27px; left: 30px; }
-    .message-card::after { bottom: 27px; right: 30px; }
-
-    .section-label {
-      color: #e39aae;
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-    }
-    h2 {
-      margin: 17px 0 20px;
-      font: 500 clamp(39px, 7vw, 66px)/1.07 'Playfair Display', Georgia, serif;
-      letter-spacing: -.035em;
-    }
-    h2 em { color: #f28aa5; }
-    .message-copy {
-      max-width: 500px;
-      margin: 0 auto;
-      color: #d2c2c9;
-      font-size: 15px;
-      line-height: 1.9;
-    }
-    .signature {
-      margin-top: 29px;
-      color: #f29ab0;
-      font: italic 22px 'Playfair Display', Georgia, serif;
-    }
-
-    .little-things {
-      padding: 85px 24px 95px;
-      text-align: center;
-    }
-    .little-things h2 {
-      margin-bottom: 12px;
-      font-size: clamp(34px, 5vw, 48px);
-    }
-    .little-things > p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 14px;
-    }
-    .reasons {
-      max-width: 900px;
-      margin: 42px auto 0;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-    .reason {
-      min-height: 155px;
-      padding: 25px 20px;
-      border: 1px solid rgba(255,255,255,.08);
-      background: rgba(255,255,255,.025);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 12px;
-    }
-    .reason-icon { color: var(--pink); font-size: 22px; }
-    .reason p {
-      margin: 0;
-      color: #e8dce1;
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 17px;
-    }
-
-    footer {
-      padding: 25px 20px 32px;
-      border-top: 1px solid rgba(255,255,255,.07);
-      color: #8f8188;
-      text-align: center;
-      font-size: 11px;
-      letter-spacing: .05em;
-    }
-    footer span { color: var(--pink); }
-
-    .surprise-modal {
+    .navigation {
       position: fixed;
-      z-index: 5;
-      inset: 0;
-      padding: 20px;
+      z-index: 4;
+      right: clamp(18px, 5vw, 64px);
+      bottom: 28px;
+      left: clamp(18px, 5vw, 64px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      pointer-events: none;
+    }
+    .nav-button {
+      width: 48px;
+      height: 48px;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 50%;
       display: grid;
       place-items: center;
-      background: rgba(8, 5, 8, .8);
-      backdrop-filter: blur(10px);
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity .25s ease, visibility .25s ease;
-    }
-    .surprise-modal.open { opacity: 1; visibility: visible; }
-    .modal-card {
-      position: relative;
-      width: min(480px, 100%);
-      padding: 48px 34px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: radial-gradient(ellipse at 50% 0%, rgba(239,107,147,.2), transparent 55%), #21141e;
-      text-align: center;
-      transform: translateY(12px) scale(.98);
-      transition: transform .25s ease;
-    }
-    .surprise-modal.open .modal-card { transform: translateY(0) scale(1); }
-    .modal-heart { color: #f27b9b; font-size: 35px; }
-    .modal-card h2 { margin: 14px 0; font-size: 42px; }
-    .modal-card p {
-      color: #d2c2c9;
-      font: italic 18px/1.7 'Playfair Display', Georgia, serif;
-    }
-    .close-button {
-      position: absolute;
-      top: 12px;
-      right: 14px;
-      border: 0;
-      background: transparent;
-      color: #cbbbc2;
-      font-size: 25px;
+      background: rgba(31,18,28,.76);
+      color: white;
+      font-size: 23px;
       cursor: pointer;
+      pointer-events: auto;
+      backdrop-filter: blur(12px);
+      transition: transform .2s ease, background .2s ease, opacity .2s ease;
     }
-    .confetti-heart {
-      position: fixed;
-      z-index: 6;
-      pointer-events: none;
-      color: #f27b9b;
-      animation: float-up 1.8s ease-out forwards;
+    .nav-button:hover:not(:disabled) { transform: scale(1.08); background: #a92c56; }
+    .nav-button:disabled { opacity: .32; cursor: default; }
+    .page-progress { display: flex; align-items: center; gap: 9px; pointer-events: auto; }
+    .page-dot {
+      width: 7px;
+      height: 7px;
+      padding: 0;
+      border: 0;
+      border-radius: 99px;
+      background: rgba(255,255,255,.32);
+      cursor: pointer;
+      transition: width .25s ease, background .25s ease;
     }
+    .page-dot[aria-current="step"] { width: 23px; background: var(--pink); }
+    .page-count { min-width: 43px; color: #cbbbc2; font-size: 11px; letter-spacing: .08em; text-align: right; }
 
     @keyframes heartbeat {
       0%, 45%, 100% { transform: scale(1); }
@@ -350,148 +247,138 @@
       22% { transform: scale(1.02); }
     }
     @keyframes pulse { 50% { transform: scale(1.25); opacity: .65; } }
-    @keyframes rise {
-      from { opacity: 0; transform: translateY(18px); }
+    @keyframes content-in {
+      from { opacity: 0; transform: translateY(14px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    @keyframes float-up {
-      to { transform: translate(var(--drift), -110px) rotate(var(--turn)); opacity: 0; }
-    }
-
     @media (max-width: 620px) {
-      .topbar { padding: 22px 20px; }
-      .top-note { font-size: 10px; }
-      .hero { min-height: 700px; height: 95svh; }
-      .hero::before { left: 5%; }
-      .hero::after { right: 5%; }
-      .heart-stage { margin-top: 34px; margin-bottom: 26px; }
-      .message-section { padding: 70px 16px; }
-      .reasons {
-        grid-template-columns: 1fr;
-        max-width: 420px;
-        gap: 10px;
-        margin-top: 30px;
-      }
-      .reason { min-height: 105px; }
-      .little-things { padding: 68px 20px; }
+      .topbar { padding: 21px 20px; }
+      .top-note { font-size: 9px; }
+      .story-page { padding: 85px 20px 105px; }
+      .reasons { grid-template-columns: 1fr; gap: 9px; margin-top: 25px; }
+      .reason { min-height: 80px; flex-direction: row; }
+      .navigation { bottom: 18px; }
+      .nav-button { width: 44px; height: 44px; }
     }
-
+    @media (max-height: 620px) and (min-width: 621px) {
+      .story-page { padding-top: 75px; padding-bottom: 90px; }
+      .heart-stage { height: 100px; margin: 15px auto; }
+      .heart { font-size: 70px; }
+      .heart-glow { width: 110px; height: 110px; }
+      .reason { min-height: 110px; }
+    }
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        scroll-behavior: auto !important;
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: .01ms !important;
-      }
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
     }
   </style>
 </head>
 <body>
-  <div class="page">
-    <header class="topbar">
-      <a class="brand" href="#home" aria-label="For Nidi home">for <span>nidi</span></a>
-      <div class="top-note">a little something, just for you</div>
-    </header>
+  <header class="topbar">
+    <a class="brand" href="#page-1" id="home-link">for <span>nidi</span></a>
+    <div class="top-note">a little something, just for you</div>
+  </header>
 
-    <main>
-      <section class="hero" id="home" aria-labelledby="hero-title">
-        <div class="hero-content">
-          <div class="eyebrow">made with love</div>
-          <h1 id="hero-title">For <em>Nidi</em></h1>
-          <p class="hero-subtitle">My favorite person. My favorite feeling.</p>
-          <div class="heart-stage" aria-hidden="true">
-            <div class="heart-glow"></div>
-            <div class="heart">♥</div>
-          </div>
-          <p class="hero-caption">A tiny reminder of how much you mean to me.</p>
-          <button class="button" id="open-surprise" type="button">
-            Open your little surprise <span class="arrow">›</span>
-          </button>
-        </div>
-        <a class="scroll-cue" href="#note">there's more</a>
-      </section>
+  <main id="story" aria-live="polite">
+    <section class="story-page active" id="page-1" aria-labelledby="title-1">
+      <div class="content">
+        <div class="eyebrow">made with love</div>
+        <h1 id="title-1">For <em>Nidi</em></h1>
+        <p class="subtitle">My favorite person. My favorite feeling.</p>
+        <div class="heart-stage" aria-hidden="true"><div class="heart-glow"></div><div class="heart">♥</div></div>
+        <p class="caption">A tiny reminder of how much you mean to me.</p>
+      </div>
+    </section>
 
-      <section class="message-section" id="note" aria-labelledby="note-title">
-        <article class="message-card">
-          <div class="section-label">this one is for you</div>
-          <h2 id="note-title">I love <em>you</em></h2>
-          <p class="message-copy">Nidi, you make ordinary days feel a little brighter and every moment feel a little more special. This page is just a small way to say what I hope you always know: you are so loved, exactly as you are.</p>
-          <div class="signature">Always yours ♥</div>
-        </article>
-      </section>
+    <section class="story-page" id="page-2" aria-labelledby="title-2" aria-hidden="true">
+      <article class="content note-card">
+        <div class="section-label">this one is for you</div>
+        <h2 id="title-2">I love <em>you</em></h2>
+        <p class="description">Nidi, you make ordinary days feel a little brighter and every moment feel a little more special. This page is just a small way to say what I hope you always know: you are so loved, exactly as you are.</p>
+        <div class="signature">Always yours ♥</div>
+      </article>
+    </section>
 
-      <section class="little-things" aria-labelledby="things-title">
+    <section class="story-page" id="page-3" aria-labelledby="title-3" aria-hidden="true">
+      <div class="content">
         <div class="section-label">the little things</div>
-        <h2 id="things-title">You make life sweeter.</h2>
-        <p>Just a few reasons you make my world a better place.</p>
+        <h2 id="title-3">You make life <em>sweeter.</em></h2>
+        <p class="description">A few of the many reasons you make my world a better place.</p>
         <div class="reasons">
-          <article class="reason">
-            <div class="reason-icon" aria-hidden="true">♡</div>
-            <p>Your beautiful heart</p>
-          </article>
-          <article class="reason">
-            <div class="reason-icon" aria-hidden="true">✧</div>
-            <p>The way you make me smile</p>
-          </article>
-          <article class="reason">
-            <div class="reason-icon" aria-hidden="true">♥</div>
-            <p>Simply being you</p>
-          </article>
+          <article class="reason"><div class="reason-icon" aria-hidden="true">♡</div><p>Your beautiful heart</p></article>
+          <article class="reason"><div class="reason-icon" aria-hidden="true">✧</div><p>The way you make me smile</p></article>
+          <article class="reason"><div class="reason-icon" aria-hidden="true">♥</div><p>Simply being you</p></article>
         </div>
-      </section>
-    </main>
+      </div>
+    </section>
 
-    <footer>made for Nidi, with <span>♥</span> and all my love</footer>
-  </div>
+    <section class="story-page" id="page-4" aria-labelledby="title-4" aria-hidden="true">
+      <div class="content">
+        <div class="eyebrow">one last thing</div>
+        <div class="heart-stage" aria-hidden="true"><div class="heart-glow"></div><div class="heart">♥</div></div>
+        <h2 id="title-4">You are my <em>person.</em></h2>
+        <p class="description">In every little moment and every big adventure—I'm so glad it's you, Nidi.</p>
+        <div class="signature">I love you, jaan ♥</div>
+      </div>
+    </section>
+  </main>
 
-  <div class="surprise-modal" id="surprise" role="dialog" aria-modal="true" aria-labelledby="surprise-title" aria-hidden="true">
-    <div class="modal-card">
-      <button class="close-button" id="close-surprise" type="button" aria-label="Close">×</button>
-      <div class="modal-heart" aria-hidden="true">♥</div>
-      <div class="section-label">one last thing</div>
-      <h2 id="surprise-title">You are my <em>person.</em></h2>
-      <p>In every little moment and every big adventure—I'm so glad it's you, Nidi.</p>
-      <div class="signature">I love you, jaan ♥</div>
+  <nav class="navigation" aria-label="Page navigation">
+    <button class="nav-button" id="previous" type="button" aria-label="Previous page" disabled>‹</button>
+    <div class="page-progress" role="group" aria-label="Choose a page">
+      <button class="page-dot" type="button" aria-label="Go to page 1" aria-current="step"></button>
+      <button class="page-dot" type="button" aria-label="Go to page 2"></button>
+      <button class="page-dot" type="button" aria-label="Go to page 3"></button>
+      <button class="page-dot" type="button" aria-label="Go to page 4"></button>
     </div>
-  </div>
+    <span class="page-count" id="page-count" aria-live="polite">01 / 04</span>
+    <button class="nav-button" id="next" type="button" aria-label="Next page">›</button>
+  </nav>
 
   <script>
-    const modal = document.getElementById('surprise');
-    const openButton = document.getElementById('open-surprise');
-    const closeButton = document.getElementById('close-surprise');
+    const pages = Array.from(document.querySelectorAll('.story-page'));
+    const dots = Array.from(document.querySelectorAll('.page-dot'));
+    const previousButton = document.getElementById('previous');
+    const nextButton = document.getElementById('next');
+    const pageCount = document.getElementById('page-count');
+    let currentPage = 0;
 
-    function closeSurprise() {
-      modal.classList.remove('open');
-      modal.setAttribute('aria-hidden', 'true');
-      openButton.focus();
+    function showPage(index) {
+      if (index < 0 || index >= pages.length || index === currentPage) return;
+      const oldPage = currentPage;
+      currentPage = index;
+
+      pages.forEach((page, pageIndex) => {
+        const active = pageIndex === currentPage;
+        page.classList.toggle('active', active);
+        page.classList.toggle('leaving-left', pageIndex === oldPage && currentPage > oldPage);
+        page.setAttribute('aria-hidden', String(!active));
+        if (active) page.scrollTop = 0;
+      });
+
+      dots.forEach((dot, dotIndex) => {
+        if (dotIndex === currentPage) dot.setAttribute('aria-current', 'step');
+        else dot.removeAttribute('aria-current');
+      });
+      previousButton.disabled = currentPage === 0;
+      nextButton.disabled = currentPage === pages.length - 1;
+      pageCount.textContent = `${String(currentPage + 1).padStart(2, '0')} / ${String(pages.length).padStart(2, '0')}`;
+      history.replaceState(null, '', `#page-${currentPage + 1}`);
     }
 
-    openButton.addEventListener('click', () => {
-      modal.classList.add('open');
-      modal.setAttribute('aria-hidden', 'false');
-      closeButton.focus();
-
-      for (let i = 0; i < 16; i++) {
-        const heart = document.createElement('span');
-        heart.className = 'confetti-heart';
-        heart.textContent = Math.random() > .5 ? '♥' : '♡';
-        heart.style.left = `${30 + Math.random() * 40}vw`;
-        heart.style.top = `${48 + Math.random() * 20}vh`;
-        heart.style.fontSize = `${12 + Math.random() * 18}px`;
-        heart.style.setProperty('--drift', `${(Math.random() - .5) * 220}px`);
-        heart.style.setProperty('--turn', `${(Math.random() - .5) * 90}deg`);
-        document.body.appendChild(heart);
-        window.setTimeout(() => heart.remove(), 1900);
-      }
-    });
-
-    closeButton.addEventListener('click', closeSurprise);
-    modal.addEventListener('click', (event) => {
-      if (event.target === modal) closeSurprise();
+    previousButton.addEventListener('click', () => showPage(currentPage - 1));
+    nextButton.addEventListener('click', () => showPage(currentPage + 1));
+    dots.forEach((dot, index) => dot.addEventListener('click', () => showPage(index)));
+    document.getElementById('home-link').addEventListener('click', (event) => {
+      event.preventDefault();
+      showPage(0);
     });
     document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && modal.classList.contains('open')) closeSurprise();
+      if (event.key === 'ArrowRight' || event.key === 'PageDown') showPage(currentPage + 1);
+      if (event.key === 'ArrowLeft' || event.key === 'PageUp') showPage(currentPage - 1);
     });
+
+    const initialPage = Number(location.hash.replace('#page-', '')) - 1;
+    if (Number.isInteger(initialPage) && initialPage >= 0 && initialPage < pages.length) showPage(initialPage);
   </script>
 </body>
 </html>
