@@ -69,10 +69,6 @@
       .story-page { padding-top: 75px; padding-bottom: 90px; } .photo-gallery { margin-top: 16px; } .photo-gallery img { height: 34vh; }
       .heart-stage { height: 100px; margin: 15px auto; } .heart { font-size: 70px; } .heart-glow { width: 110px; height: 110px; }
     }
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
-      .flower-fall { display: none; }
-    }
   </style>
 </head>
 <body>
@@ -179,21 +175,18 @@
     });
 
     const flowerLayer = document.getElementById('flower-fall');
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (!reducedMotion.matches) {
-      const flowers = ['🌸', '🌷', '🌼', '✿'];
-      for (let i = 0; i < 18; i += 1) {
-        const flower = document.createElement('span');
-        flower.className = 'falling-flower';
-        flower.textContent = flowers[i % flowers.length];
-        flower.style.setProperty('--left', `${Math.random() * 100}%`);
-        flower.style.setProperty('--size', `${14 + Math.random() * 14}px`);
-        flower.style.setProperty('--duration', `${11 + Math.random() * 13}s`);
-        flower.style.setProperty('--delay', `${-Math.random() * 24}s`);
-        flower.style.setProperty('--sway', `${-45 + Math.random() * 90}px`);
-        flower.style.setProperty('--opacity', `${0.35 + Math.random() * 0.4}`);
-        flowerLayer.appendChild(flower);
-      }
+    const flowers = ['🌸', '🌷', '🌼', '✿'];
+    for (let i = 0; i < 18; i += 1) {
+      const flower = document.createElement('span');
+      flower.className = 'falling-flower';
+      flower.textContent = flowers[i % flowers.length];
+      flower.style.setProperty('--left', `${Math.random() * 100}%`);
+      flower.style.setProperty('--size', `${14 + Math.random() * 14}px`);
+      flower.style.setProperty('--duration', `${11 + Math.random() * 13}s`);
+      flower.style.setProperty('--delay', `${-Math.random() * 24}s`);
+      flower.style.setProperty('--sway', `${-45 + Math.random() * 90}px`);
+      flower.style.setProperty('--opacity', `${0.35 + Math.random() * 0.4}`);
+      flowerLayer.appendChild(flower);
     }
 
     const initialPage = Number(location.hash.replace('#page-', '')) - 1;
