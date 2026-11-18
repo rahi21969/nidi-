@@ -84,7 +84,7 @@
       pointer-events: auto;
     }
     .story-page.leaving-left { transform: translateX(-5%); }
-    .content { width: min(760px, 100%); animation: content-in .65s both; }
+    .content { width: min(760px, 100%); }
     .active .content { animation: content-in .65s both; }
 
     .eyebrow, .section-label {
@@ -156,14 +156,37 @@
     .note-card::after { right: 26px; bottom: 24px; }
     .signature { margin-top: 27px; color: #f29ab0; font: italic 22px 'Playfair Display', Georgia, serif; }
 
+    .photo-gallery {
+      width: min(760px, 100%);
+      margin: 30px auto 0;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .photo-gallery img {
+      display: block;
+      width: 100%;
+      height: clamp(180px, 31vh, 300px);
+      border: 1px solid rgba(242,123,155,.35);
+      border-radius: 14px;
+      object-fit: cover;
+      box-shadow: 0 8px 25px rgba(0,0,0,.3), 0 0 18px rgba(242,123,155,.08);
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+    .photo-gallery img:hover {
+      transform: translateY(-5px) scale(1.025);
+      box-shadow: 0 14px 34px rgba(0,0,0,.4), 0 0 25px rgba(242,123,155,.2);
+    }
+    .photo-hint { margin: 16px 0 0; color: var(--muted); font-size: 12px; }
+
     .reasons {
-      margin-top: 38px;
+      margin-top: 30px;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 14px;
     }
     .reason {
-      min-height: 150px;
+      min-height: 125px;
       padding: 22px 16px;
       border: 1px solid rgba(255,255,255,.09);
       background: rgba(255,255,255,.035);
@@ -177,27 +200,6 @@
     .reason:hover { transform: translateY(-5px); border-color: rgba(242,123,155,.45); background: rgba(242,123,155,.07); }
     .reason-icon { color: var(--pink); font-size: 25px; }
     .reason p { margin: 0; color: #e8dce1; font: 17px 'Playfair Display', Georgia, serif; }
-
-    .button {
-      min-height: 50px;
-      margin-top: 27px;
-      padding: 0 25px;
-      border: 1px solid rgba(255,255,255,.16);
-      border-radius: 999px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      background: linear-gradient(135deg, #d95278, #a92c56);
-      color: white;
-      font-size: 13px;
-      font-weight: 700;
-      box-shadow: 0 10px 35px rgba(190,43,87,.27);
-      cursor: pointer;
-      transition: transform .2s ease, box-shadow .2s ease;
-    }
-    .button:hover { transform: translateY(-2px); box-shadow: 0 14px 40px rgba(190,43,87,.4); }
-    .button-arrow { font-size: 19px; line-height: 1; }
 
     .navigation {
       position: fixed;
@@ -255,48 +257,24 @@
       .topbar { padding: 21px 20px; }
       .top-note { font-size: 9px; }
       .story-page { padding: 85px 20px 105px; }
-      .reasons { grid-template-columns: 1fr; gap: 9px; margin-top: 25px; }
-      .reason { min-height: 80px; flex-direction: row; }
+      .photo-gallery { grid-template-columns: 1fr; gap: 10px; max-width: 390px; margin-top: 20px; }
+      .photo-gallery img { height: min(23vh, 190px); }
+      .reasons { grid-template-columns: 1fr; gap: 9px; margin-top: 22px; }
+      .reason { min-height: 70px; flex-direction: row; }
       .navigation { bottom: 18px; }
       .nav-button { width: 44px; height: 44px; }
     }
     @media (max-height: 620px) and (min-width: 621px) {
       .story-page { padding-top: 75px; padding-bottom: 90px; }
+      .photo-gallery { margin-top: 16px; }
+      .photo-gallery img { height: 34vh; }
       .heart-stage { height: 100px; margin: 15px auto; }
       .heart { font-size: 70px; }
       .heart-glow { width: 110px; height: 110px; }
-      .reason { min-height: 110px; }
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
     }
-    /* PHOTO GALLERY */
-.photo-gallery {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
-  max-width: 700px;
-  margin: 28px auto 0;
-}
-
-.photo-gallery img {
-  width: 100%;
-  height: 210px;
-  object-fit: cover;
-  border-radius: 14px;
-  border: 1px solid rgba(242, 123, 155, 0.35);
-  box-shadow: 0 8px 25px rgba(242, 123, 155, 0.15);
-}
-
-@media (max-width: 620px) {
-  .photo-gallery {
-    gap: 9px;
-  }
-
-  .photo-gallery img {
-    height: 150px;
-  }
-}
   </style>
 </head>
 <body>
@@ -327,44 +305,28 @@
 
     <section class="story-page" id="page-3" aria-labelledby="title-3" aria-hidden="true">
       <div class="content">
-        <div class="section-label">the little things</div>
-        <h2 id="title-3">You make life <em>sweeter.</em></h2>
+        <div class="eyebrow">our memories</div>
+        <h2 id="title-3">Beautiful <em>memories</em></h2>
+        <p class="description">Every picture holds a special moment.</p>
+        <div class="photo-gallery">
+          <img src="images/photo1.jpeg" alt="A favorite memory with Nidi" loading="lazy">
+          <img src="images/photo2.jpeg" alt="Another lovely memory with Nidi" loading="lazy">
+          <img src="images/photo3.jpeg" alt="One more special memory with Nidi" loading="lazy">
+        </div>
+        <p class="photo-hint">More memories to come, jaan ♥</p>
+      </div>
+    </section>
+
+    <section class="story-page" id="page-4" aria-labelledby="title-4" aria-hidden="true">
+      <div class="content">
+        <div class="eyebrow">the little things</div>
+        <h2 id="title-4">You make life <em>sweeter.</em></h2>
         <p class="description">A few of the many reasons you make my world a better place.</p>
         <div class="reasons">
           <article class="reason"><div class="reason-icon" aria-hidden="true">♡</div><p>Your beautiful heart</p></article>
           <article class="reason"><div class="reason-icon" aria-hidden="true">✧</div><p>The way you make me smile</p></article>
           <article class="reason"><div class="reason-icon" aria-hidden="true">♥</div><p>Simply being you</p></article>
         </div>
-      </div>
-    </section>
-    <!-- PAGE 4: PHOTO GALLERY -->
-<section class="story-page" id="page-4" aria-labelledby="title-4" aria-hidden="true">
-  <div class="content">
-
-    <div class="eyebrow">our memories</div>
-
-    <h2 id="title-4">
-      Beautiful <em>Memories</em>
-    </h2>
-
-    <p class="description">
-      Every picture holds a special moment.
-    </p>
-
-    <div class="photo-gallery">
-      <img src="images/photo1.jpg" alt="Our memory 1">
-      <img src="images/photo2.jpg" alt="Our memory 2">
-      <img src="images/photo3.jpg" alt="Our memory 3">
-    </div>
-
-  </div>
-</section>
-    <section class="story-page" id="page-5" aria-labelledby="title-5" aria-hidden="true">
-      <div class="content">
-        <div class="eyebrow">one last thing</div>
-        <div class="heart-stage" aria-hidden="true"><div class="heart-glow"></div><div class="heart">♥</div></div>
-        <h2 id="title-5">You are my <em>person.</em></h2>
-        <p class="description">In every little moment and every big adventure—I'm so glad it's you, Nidi.</p>
         <div class="signature">I love you, jaan ♥</div>
       </div>
     </section>
@@ -426,7 +388,7 @@
     });
 
     const initialPage = Number(location.hash.replace('#page-', '')) - 1;
-    if (Number.isInteger(initialPage) && initialPage >= 0 && initialPage < pages.length) showPage(initialPage);
+    if (Number.isInteger(initialPage) && initialPage > 0 && initialPage < pages.length) showPage(initialPage);
   </script>
 </body>
 </html>
