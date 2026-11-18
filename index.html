@@ -298,6 +298,82 @@
     opacity: 0;
   }
 }
+    
+/* HEART OF TREES ANIMATION */
+
+.nature-section {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  padding: 60px 20px;
+  background: #10251a;
+  border-radius: 20px;
+}
+
+.nature-section h2 {
+  color: #b8e6bd;
+}
+
+.nature-section p {
+  color: #d2e8d4;
+}
+
+.tree-heart {
+  display: inline-block;
+  animation: treePulse 2s infinite ease-in-out;
+}
+
+.tree-heart pre {
+  font-size: 30px;
+  line-height: 1.2;
+  filter: drop-shadow(0 0 12px #55d879);
+}
+
+@keyframes treePulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.12);
+  }
+}
+
+.falling-leaves span {
+  position: absolute;
+  top: -30px;
+  animation: leafFall 6s linear infinite;
+}
+
+.falling-leaves span:nth-child(1) {
+  left: 15%;
+}
+
+.falling-leaves span:nth-child(2) {
+  left: 35%;
+  animation-delay: 2s;
+}
+
+.falling-leaves span:nth-child(3) {
+  left: 65%;
+  animation-delay: 1s;
+}
+
+.falling-leaves span:nth-child(4) {
+  left: 85%;
+  animation-delay: 3s;
+}
+
+@keyframes leafFall {
+  from {
+    transform: translateY(0) rotate(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(450px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
 
   </style>
 </head>
