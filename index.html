@@ -245,7 +245,60 @@
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
-    }
+    } 
+/* Tree Heart Animation */
+.nature-section {
+  text-align: center;
+  padding: 60px 20px;
+  background: #10251a;
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.nature-section h2 {
+  color: #b8e6bd;
+  font-size: 32px;
+}
+
+.nature-section p {
+  color: #d2e8d4;
+}
+
+.tree-heart {
+  display: inline-block;
+  animation: heartBeat 2s infinite ease-in-out;
+}
+
+.tree-heart pre {
+  font-size: clamp(20px, 5vw, 38px);
+  line-height: 1.1;
+  filter: drop-shadow(0 0 12px #55d879);
+}
+
+@keyframes heartBeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.falling-leaves span {
+  position: absolute;
+  top: -30px;
+  animation: leafFall 7s linear infinite;
+}
+
+.falling-leaves span:nth-child(1) { left: 15%; }
+.falling-leaves span:nth-child(2) { left: 35%; animation-delay: 2s; }
+.falling-leaves span:nth-child(3) { left: 65%; animation-delay: 1s; }
+.falling-leaves span:nth-child(4) { left: 85%; animation-delay: 3s; }
+
+@keyframes leafFall {
+  to {
+    transform: translateY(450px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -335,6 +388,32 @@
     closeButton.addEventListener('click', closeSurprise);
     modal.addEventListener('click', (event) => { if (event.target === modal) closeSurprise(); });
     document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && modal.classList.contains('open')) closeSurprise(); });
+    
   </script>
+  
+<section class="nature-section">
+  <h2>A Heart Made of Nature ❤️</h2>
+  <p>Love grows like the trees 🌿</p>
+
+  <div class="tree-heart">
+    <pre>
+   🌳🌳   🌳🌳
+  🌳🌳🌳 🌳🌳🌳
+ 🌳🌳🌳🌳🌳🌳🌳
+  🌳🌳🌳🌳🌳
+   🌳🌳🌳
+    🌳🌳
+     🌳
+    </pre>
+  </div>
+
+  <div class="falling-leaves">
+    <span>🍃</span>
+    <span>🌿</span>
+    <span>🍃</span>
+    <span>🌿</span>
+  </div>
+</section>
+
 </body>
 </html>
