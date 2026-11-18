@@ -246,131 +246,133 @@
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
     } 
-/* Tree Heart Animation */
+
+/* PINK BLOSSOM HEART TREE */
+
 .nature-section {
-  text-align: center;
-  padding: 60px 20px;
-  background: #10251a;
   position: relative;
+  isolation: isolate;
   overflow: hidden;
-  border-radius: 20px;
+  min-height: 680px;
+  padding: 75px 20px 85px;
+  text-align: center;
+  background:
+    radial-gradient(ellipse at 50% 58%,
+      rgba(190, 40, 88, .22), transparent 48%),
+    radial-gradient(ellipse at 50% 100%,
+      rgba(105, 24, 55, .22), transparent 60%),
+    #100b10;
 }
 
 .nature-section h2 {
-  color: #b8e6bd;
-  font-size: 32px;
+  position: relative;
+  z-index: 2;
+  color: #f58ba8;
+  font: 500 clamp(32px, 5vw, 48px)/1.2
+    'Playfair Display', Georgia, serif;
+  text-shadow: 0 0 25px rgba(242, 123, 155, .25);
 }
 
 .nature-section p {
-  color: #d2e8d4;
+  position: relative;
+  z-index: 2;
+  color: #d8b9c4;
+  font-size: 16px;
+  letter-spacing: .04em;
 }
 
 .tree-heart {
-  display: inline-block;
-  animation: heartBeat 2s infinite ease-in-out;
+  position: relative;
+  z-index: 1;
+  width: min(100%, 570px);
+  margin: 35px auto 0;
+  filter: drop-shadow(0 0 24px rgba(242, 93, 143, .3));
+  animation: tree-breathe 5s ease-in-out infinite;
 }
 
-.tree-heart pre {
-  font-size: clamp(20px, 5vw, 38px);
-  line-height: 1.1;
-  filter: drop-shadow(0 0 12px #55d879);
+.tree-heart svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
 }
 
-@keyframes heartBeat {
+.blossom-tree {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: tree-sway 4s ease-in-out infinite alternate;
+}
+
+.blossom-tree:nth-of-type(3n) {
+  animation-delay: -1.5s;
+}
+
+.blossom-tree:nth-of-type(4n) {
+  animation-delay: -2.5s;
+}
+
+.tree-crown {
+  filter: drop-shadow(0 0 5px rgba(255, 125, 166, .6));
+}
+
+.petal {
+  position: absolute;
+  z-index: 3;
+  top: -25px;
+  color: #ff91b2;
+  font-size: 19px;
+  pointer-events: none;
+  animation: petal-fall linear infinite;
+}
+
+.petal:nth-child(1) { left: 12%; animation-duration: 9s; }
+.petal:nth-child(2) { left: 28%; animation-duration: 11s; animation-delay: -4s; }
+.petal:nth-child(3) { left: 47%; animation-duration: 8s; animation-delay: -2s; }
+.petal:nth-child(4) { left: 68%; animation-duration: 12s; animation-delay: -6s; }
+.petal:nth-child(5) { left: 85%; animation-duration: 10s; animation-delay: -3s; }
+.petal:nth-child(6) { left: 55%; animation-duration: 13s; animation-delay: -8s; }
+
+@keyframes tree-breathe {
   0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
+  50% { transform: scale(1.025); }
 }
 
-.falling-leaves span {
-  position: absolute;
-  top: -30px;
-  animation: leafFall 7s linear infinite;
+@keyframes tree-sway {
+  from { transform: rotate(-1.2deg); }
+  to { transform: rotate(1.2deg); }
 }
 
-.falling-leaves span:nth-child(1) { left: 15%; }
-.falling-leaves span:nth-child(2) { left: 35%; animation-delay: 2s; }
-.falling-leaves span:nth-child(3) { left: 65%; animation-delay: 1s; }
-.falling-leaves span:nth-child(4) { left: 85%; animation-delay: 3s; }
-
-@keyframes leafFall {
-  to {
-    transform: translateY(450px) rotate(360deg);
+@keyframes petal-fall {
+  0% {
+    transform: translate3d(0, -20px, 0) rotate(0deg);
     opacity: 0;
   }
-}
-    
-/* HEART OF TREES ANIMATION */
-
-.nature-section {
-  position: relative;
-  overflow: hidden;
-  text-align: center;
-  padding: 60px 20px;
-  background: #10251a;
-  border-radius: 20px;
-}
-
-.nature-section h2 {
-  color: #b8e6bd;
-}
-
-.nature-section p {
-  color: #d2e8d4;
-}
-
-.tree-heart {
-  display: inline-block;
-  animation: treePulse 2s infinite ease-in-out;
-}
-
-.tree-heart pre {
-  font-size: 30px;
-  line-height: 1.2;
-  filter: drop-shadow(0 0 12px #55d879);
-}
-
-@keyframes treePulse {
-  0%, 100% {
-    transform: scale(1);
-  }
+  10% { opacity: .9; }
   50% {
-    transform: scale(1.12);
+    transform: translate3d(45px, 300px, 0) rotate(180deg);
   }
-}
-
-.falling-leaves span {
-  position: absolute;
-  top: -30px;
-  animation: leafFall 6s linear infinite;
-}
-
-.falling-leaves span:nth-child(1) {
-  left: 15%;
-}
-
-.falling-leaves span:nth-child(2) {
-  left: 35%;
-  animation-delay: 2s;
-}
-
-.falling-leaves span:nth-child(3) {
-  left: 65%;
-  animation-delay: 1s;
-}
-
-.falling-leaves span:nth-child(4) {
-  left: 85%;
-  animation-delay: 3s;
-}
-
-@keyframes leafFall {
-  from {
-    transform: translateY(0) rotate(0);
-    opacity: 1;
-  }
-  to {
-    transform: translateY(450px) rotate(360deg);
+  100% {
+    transform: translate3d(-35px, 700px, 0) rotate(360deg);
     opacity: 0;
+  }
+}
+
+@media (max-width: 620px) {
+  .nature-section {
+    min-height: 560px;
+    padding: 60px 12px;
+  }
+
+  .tree-heart {
+    margin-top: 25px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tree-heart,
+  .blossom-tree,
+  .petal {
+    animation: none !important;
   }
 }
 
@@ -464,32 +466,115 @@
     closeButton.addEventListener('click', closeSurprise);
     modal.addEventListener('click', (event) => { if (event.target === modal) closeSurprise(); });
     document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && modal.classList.contains('open')) closeSurprise(); });
+
     
-  </script>
-  
 <section class="nature-section">
-  <h2>A Heart Made of Nature ❤️</h2>
-  <p>Love grows like the trees 🌿</p>
+  <h2>A Heart Made of Nature <span>♥</span></h2>
+  <p>Love grows like the trees ✦</p>
 
   <div class="tree-heart">
-    <pre>
-   🌳🌳   🌳🌳
-  🌳🌳🌳 🌳🌳🌳
- 🌳🌳🌳🌳🌳🌳🌳
-  🌳🌳🌳🌳🌳
-   🌳🌳🌳
-    🌳🌳
-     🌳
-    </pre>
+
+    <svg viewBox="0 0 600 500"
+         xmlns="http://www.w3.org/2000/svg"
+         role="img"
+         aria-label="A heart made of glowing pink blossom trees">
+
+      <defs>
+        <linearGradient id="pinkBark" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#f6a2b8"/>
+          <stop offset="100%" stop-color="#87324f"/>
+        </linearGradient>
+
+        <radialGradient id="pinkBloom">
+          <stop offset="0%" stop-color="#fff1f5"/>
+          <stop offset="45%" stop-color="#ffb2ca"/>
+          <stop offset="100%" stop-color="#e34e83"/>
+        </radialGradient>
+
+           <symbol id="blossom-tree" viewBox="0 0 100 130">
+          <!-- Natural branching trunk -->
+          <path d="M48 126 Q45 90 50 62
+                   M49 91 Q25 76 18 57
+                   M49 79 Q68 63 79 44
+                   M47 103 Q32 92 27 79"
+                fill="none"
+                stroke="url(#pinkBark)"
+                stroke-width="7"
+                stroke-linecap="round"/>
+
+          <!-- Blossom canopy -->
+          <g class="tree-crown" fill="url(#pinkBloom)">
+            <circle cx="49" cy="34" r="24"/>
+            <circle cx="27" cy="43" r="19"/>
+            <circle cx="69" cy="43" r="20"/>
+            <circle cx="37" cy="21" r="17"/>
+            <circle cx="61" cy="18" r="19"/>
+            <circle cx="49" cy="53" r="22"/>
+            <circle cx="15" cy="55" r="12"/>
+            <circle cx="82" cy="55" r="13"/>
+          </g>
+
+          <!-- Small blossom highlights -->
+          <g fill="#fff2f6">
+            <circle cx="37" cy="29" r="3"/>
+            <circle cx="62" cy="36" r="3"/>
+            <circle cx="48" cy="12" r="3"/>
+            <circle cx="26" cy="48" r="2.5"/>
+            <circle cx="72" cy="49" r="2.5"/>
+          </g>
+        </g>
+      </defs>
+
+      <!-- Heart-shaped arrangement -->
+      <g class="blossom-tree">
+        <use href="#blossom-tree" x="180" y="15" width="70" height="105"/>
+        <use href="#blossom-tree" x="350" y="15" width="70" height="105"/>
+      </g>
+
+      <g class="blossom-tree">
+        <use href="#blossom-tree" x="125" y="85" width="70" height="105"/>
+        <use href="#blossom-tree" x="215" y="85" width="70" height="105"/>
+        <use href="#blossom-tree" x="315" y="85" width="70" height="105"/>
+        <use href="#blossom-tree" x="405" y="85" width="70" height="105"/>
+      </g>
+
+      <g class="blossom-tree">
+        <use href="#blossom-tree" x="65" y="155" width="70" height="105"/>
+        <use href="#blossom-tree" x="155" y="155" width="70" height="105"/>
+        <use href="#blossom-tree" x="245" y="155" width="70" height="105"/>
+        <use href="#blossom-tree" x="335" y="155" width="70" height="105"/>
+        <use href="#blossom-tree" x="425" y="155" width="70" height="105"/>
+      </g>
+
+      <g class="blossom-tree">
+        <use href="#blossom-tree" x="115" y="235" width="70" height="105"/>
+        <use href="#blossom-tree" x="205" y="235" width="70" height="105"/>
+        <use href="#blossom-tree" x="295" y="235" width="70" height="105"/>
+        <use href="#blossom-tree" x="385" y="235" width="70" height="105"/>
+      </g>
+
+      <g class="blossom-tree">
+        <use href="#blossom-tree" x="175" y="315" width="70" height="105"/>
+        <use href="#blossom-tree" x="265" y="315" width="70" height="105"/>
+        <use href="#blossom-tree" x="355" y="315" width="70" height="105"/>
+        <use href="#blossom-tree" x="225" y="385" width="70" height="105"/>
+        <use href="#blossom-tree" x="315" y="385" width="70" height="105"/>
+      </g>
+    </svg>
   </div>
 
-  <div class="falling-leaves">
-    <span>🍃</span>
-    <span>🌿</span>
-    <span>🍃</span>
-    <span>🌿</span>
+  <div class="falling-leaves" aria-hidden="true">
+    <span class="petal">✿</span>
+    <span class="petal">✧</span>
+    <span class="petal">❀</span>
+    <span class="petal">✿</span>
+    <span class="petal">✧</span>
+    <span class="petal">❀</span>
   </div>
 </section>
 
+</section>
+    
+ 
 </body>
 </html>
